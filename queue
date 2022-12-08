@@ -1,0 +1,92 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define max 10
+int queue [max];
+int front=-1,rear=-1;
+
+void enqueue ( );
+void dequeue();
+void display();
+
+void main(){
+    int ch,y,d;
+    do{
+        printf("enter choice");
+        scanf("%d",&ch);
+        switch(ch){
+            case 1:
+            enqueue();
+            break;
+           
+            case 2:
+            dequeue();
+            break;
+           
+            case 3:
+            display();
+            break;
+        }
+        printf("do you want to continue(0/1)");
+        scanf("%d",&y);
+    }while(y==1);
+}
+
+
+void enqueue()
+{ int d;
+    printf("enter element");
+    scanf("%d",&d);
+   
+   
+    if((rear+1)%max==front || (rear == max-1 && front==0) )
+    {
+        printf("queue is full");
+        return;
+    }
+    else if (rear==-1){
+        front=rear=0;
+        queue[rear]=d;
+    }
+    else
+    {
+        rear=(rear+1)%max;
+        queue[rear]=d;
+    }
+}
+
+void dequeue()
+{
+    if (front==-1)
+    {
+        printf("underflow");
+        return;
+    }
+    else if(front == rear)
+    {
+        front =rear = -1;
+    }
+    else
+    {
+        front=(rear+1)%max;
+    }
+}
+
+void display ()
+{
+    if(rear >front)
+    {
+        for(int i=front;i<=rear;i++)
+        {
+            printf("%d",queue[i]);
+        }
+    }
+        else
+        {
+            for(int i=front;i<max;i++)
+            printf("%d",queue[i]);
+           
+            for(int i=0;i<=rear;i++)
+            printf("%d",queue[i]);
+        }
+   
+}
